@@ -89,6 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
         campInvitatPartener.style.display = 'none';
         if (numarPersoane.value === '1') {
             campInvitat.style.display = 'block';
+            campInvitatPartener.querySelector('input').value = ""; // Resetează câmpul partener
         } else if (numarPersoane.value === '2') {
             campInvitat.style.display = 'block';
             campInvitatPartener.style.display = 'block';
