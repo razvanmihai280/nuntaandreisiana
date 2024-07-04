@@ -1937,7 +1937,7 @@ button.click-me:hover {
 	display: flex;
 	flex-direction: column;
   text-align: center;
-  width: 100%;
+  width: 99%;
 }
 
 .close {
