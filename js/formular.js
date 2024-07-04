@@ -11,7 +11,8 @@ document.addEventListener('DOMContentLoaded', function() {
     var submitButton = document.getElementById('submit');
     var form = document.getElementById('contact-form');
     var numarMeniuriStandard = document.querySelector("select[name='Numar Meniuri Standard']");
-    var numarMeniuriVegetarian = document.querySelector("select[name='Numar Meniuri Vegetarian']");
+    var numarMeniuriVegetarian = document.getElementById('numarMeniuriVegetarian');
+    var hiddenVegetarianMeniuri = document.getElementById('hiddenVegetarianMeniuri');
     var numarCopiiSelect = document.querySelector("select[name='Numar Copii']");
 
     function updateMeniuOptions() {
@@ -33,7 +34,8 @@ document.addEventListener('DOMContentLoaded', function() {
         var standardMeniuri = parseInt(numarMeniuriStandard.value) || 0;
         var vegetarianMeniuri = totalMeniuri - standardMeniuri;
 
-        numarMeniuriVegetarian.value = vegetarianMeniuri;
+        hiddenVegetarianMeniuri.value = vegetarianMeniuri;
+        numarMeniuriVegetarian.innerHTML = `<option value="${vegetarianMeniuri}">${vegetarianMeniuri}</option>`;
     }
 
     function validateForm() {
@@ -72,10 +74,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             if (campMeniu.style.display !== 'none' && numarMeniuriStandard.value === '') {
-                valid = false;
-            }
-
-            if (campVegan.style.display !== 'none' && numarMeniuriVegetarian.value === '') {
                 valid = false;
             }
         }
@@ -132,6 +130,4 @@ document.addEventListener('DOMContentLoaded', function() {
             alert('Te rog completează toate câmpurile obligatorii.');
         }
     });
-
-    numarMeniuriVegetarian.disabled = true;
 });

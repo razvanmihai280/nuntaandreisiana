@@ -261,24 +261,21 @@
 						</div>
 				
 						<div class="form-group" id="campVegan" style="display: none;">
-						  <label style="color: white;">Alege numărul de meniuri Vegetarian</label>
-						  <select name="Numar Meniuri Vegetarian" class="form-control">
-							<option value="">-- Selectați o opțiune --</option>
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
-							<option value="6">6</option>
-							<option value="0">0</option>
-						  </select>
+							<label style="color: white;">Număr meniuri Vegetarian</label>
+							<select name="Numar Meniuri Vegetarian Disabled" class="form-control" id="numarMeniuriVegetarian" disabled>
+								<option value="">-- Selectați o opțiune --</option>
+							</select>
 						</div>
+			
+						<!-- Hidden input for Vegetarian Menus -->
+						<input type="hidden" name="Numar Meniuri Vegetarian" id="hiddenVegetarianMeniuri">
+			
 				
 						<div class="form-group" id="campMesaj" style="display: none; margin-bottom: 20px;">
 						  <label style="color: white;">Vrei să ne lași un mesaj?</label>
 						  <textarea class="form-control" name="Mesaj" rows="7" style="height: 120px;" placeholder="Completați aici"></textarea>
 						</div>
-				
+						
 						<br>
 						<input type="submit" class="btn btn-default btn-block" value="Trimite Răspuns" id="submit" style="display: none;">
 					  </form>
