@@ -2000,8 +2000,8 @@ select {
 }
 
 option {
-  background: red; /* Fundal alb pentru opțiuni */
-  color: #333; /* Culoarea textului */
+  background: #C8C7C9; /* Fundal alb pentru opțiuni */
+  color: #1E1E1F; /* Culoarea textului */
 }
 
 /* Adăugarea unei săgeți personalizate pentru select */
