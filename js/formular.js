@@ -15,23 +15,21 @@ document.addEventListener('DOMContentLoaded', function() {
         var valid = true;
 
         if (confirmarePrezenta.value === 'Nu') {
-            if (campInvitat.querySelector('input').value.trim().length < 3) {
+            if (numarPersoane.value === '1' && campInvitat.querySelector('input').value.trim().length < 3) {
                 valid = false;
             }
         } else {
-            // Validare câmpuri vizibile când confirmarea este "Da"
-            if (numarPersoane.value === '') {
-                valid = false;
-            } else {
-                if (numarPersoane.value === '1') {
-                    if (campInvitat.querySelector('input').value.trim().length < 3) {
-                        valid = false;
-                    }
-                } else if (numarPersoane.value === '2') {
-                    if (campInvitat.querySelector('input').value.trim().length < 3 || campInvitatPartener.querySelector('input').value.trim().length < 3) {
-                        valid = false;
-                    }
+            if (numarPersoane.value === '1') {
+                if (campInvitat.querySelector('input').value.trim().length < 3) {
+                    valid = false;
                 }
+                campInvitatPartener.querySelector('input').value = '-';
+                campInvitatPartener.style.display = 'none';
+            } else if (numarPersoane.value === '2') {
+                if (campInvitat.querySelector('input').value.trim().length < 3 || campInvitatPartener.querySelector('input').value.trim().length < 3) {
+                    valid = false;
+                }
+                campInvitatPartener.style.display = 'block';
             }
 
             if (confirmarePrezenta.value === '') {
@@ -53,8 +51,6 @@ document.addEventListener('DOMContentLoaded', function() {
             if (campVegan.style.display !== 'none' && campVegan.querySelector('select').value === '') {
                 valid = false;
             }
-
-           
         }
 
         submitButton.style.display = valid ? 'block' : 'none';
@@ -62,13 +58,17 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     numarPersoane.addEventListener('change', function() {
-        campInvitat.style.display = 'none';
-        campInvitatPartener.style.display = 'none';
         if (numarPersoane.value === '1') {
             campInvitat.style.display = 'block';
+            campInvitatPartener.style.display = 'none';
+            campInvitatPartener.querySelector('input').value = '-';
         } else if (numarPersoane.value === '2') {
             campInvitat.style.display = 'block';
             campInvitatPartener.style.display = 'block';
+            campInvitatPartener.querySelector('input').value = '';
+        } else {
+            campInvitat.style.display = 'none';
+            campInvitatPartener.style.display = 'none';
         }
         validateForm();
     });

@@ -196,94 +196,95 @@
 				</div>
 				<div class="row animate-box">
 					<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-					  <form class="form" method="post" action="https://script.google.com/macros/s/AKfycbwvdfD5T-KYmiIQxIel9x_-J-9myLEqeD1ZN_OM-lnxpssmEud02ni7FZJj37ymTgsxDQ/exec" name="contact-form" id="contact-form">
-						<div class="form-group" id="campPersoane">
-						  <label style="color: white;">Câte persoane?:</label>
-						  <select name="Numar Persoane" class="form-control" id="numarPersoane">
-							<option value="">-- Selectează opțiunea --</option>
-							<option value="1">O persoană</option>
-							<option value="2">Două persoane</option>
-						  </select>
-						</div>
+						<form class="form" method="post" action="https://script.google.com/macros/s/AKfycbwvdfD5T-KYmiIQxIel9x_-J-9myLEqeD1ZN_OM-lnxpssmEud02ni7FZJj37ymTgsxDQ/exec" name="contact-form" id="contact-form">
+							<div class="form-group" id="campPersoane">
+								<label style="color: white;">Câte persoane?:</label>
+								<select name="Numar Persoane" class="form-control" id="numarPersoane" required>
+									<option value="">-- Selectează opțiunea --</option>
+									<option value="1">O persoană</option>
+									<option value="2">Două persoane</option>
+								</select>
+							</div>
 				
-						<div class="form-group" id="numeInvitat" style="display: none;">
-						  <label style="color: white;">Nume și prenume:</label>
-						  <input type="text" name="Nume Prenume" class="form-control" placeholder="Nume și Prenume">
-						</div>
+							<div class="form-group" id="numeInvitat" style="display: none;">
+								<label style="color: white;">Nume și prenume:</label>
+								<input type="text" name="Nume Prenume" class="form-control" placeholder="Nume și Prenume" required>
+							</div>
 				
-						<div class="form-group" id="numePartenerInvitat" style="display: none;">
-						  <label style="color: white;">Nume și prenume partener:</label>
-						  <input type="text" name="Nume Prenume Partener" class="form-control" placeholder="Nume și Prenume">
-						</div>
+							<div class="form-group" id="numePartenerInvitat" style="display: none;">
+								<label style="color: white;">Nume și prenume partener:</label>
+								<input type="text" name="Nume Prenume Partener" class="form-control" placeholder="Nume și Prenume">
+							</div>
 				
-						<div class="form-group">
-						  <label style="color: white;">Confirmare Prezență:</label>
-						  <select name="Confirmare Prezenta" class="form-control" id="confirmarePrezenta">
-							<option value="">-- Selectează opțiunea --</option>
-							<option value="Da">Da</option>
-							<option value="Nu">Nu</option>
-						  </select>
-						</div>
+							<div class="form-group">
+								<label style="color: white;">Confirmare Prezență:</label>
+								<select name="Confirmare Prezenta" class="form-control" id="confirmarePrezenta" required>
+									<option value="">-- Selectează opțiunea --</option>
+									<option value="Da">Da</option>
+									<option value="Nu">Nu</option>
+								</select>
+							</div>
 				
-						<div class="form-group" id="campCopii" style="display: none;">
-						  <label style="color: white;">Veți veni cu copii?</label>
-						  <select name="Numar Copii" class="form-control">
-							<option value="">-- Selectați o opțiune --</option>
-							<option value="1">Cu un copil</option>
-							<option value="2">Cu 2 copii</option>
-							<option value="3">Cu 3 copii</option>
-							<option value="4">Cu 4 copii</option>
-							<option value="0">Nu</option>
-						  </select>
-						</div>
+							<div class="form-group" id="campCopii" style="display: none;">
+								<label style="color: white;">Veți veni cu copii?</label>
+								<select name="Numar Copii" class="form-control">
+									<option value="">-- Selectați o opțiune --</option>
+									<option value="1">Cu un copil</option>
+									<option value="2">Cu 2 copii</option>
+									<option value="3">Cu 3 copii</option>
+									<option value="4">Cu 4 copii</option>
+									<option value="0">Nu</option>
+								</select>
+							</div>
 				
-						<div class="form-group" id="campCazare" style="display: none;">
-						  <label style="color: white;">Aveți nevoie de cazare? </label>
-						  <select name="Necesita Cazare" class="form-control">
-							<option value="">-- Selectați o opțiune --</option>
-							<option value="Da">Da</option>
-							<option value="Nu">Nu</option>
-						  </select>
-						</div>
+							<div class="form-group" id="campCazare" style="display: none;">
+								<label style="color: white;">Aveți nevoie de cazare?</label>
+								<select name="Necesita Cazare" class="form-control">
+									<option value="">-- Selectați o opțiune --</option>
+									<option value="Da">Da</option>
+									<option value="Nu">Nu</option>
+								</select>
+							</div>
 				
-						<div class="form-group" id="campMeniu" style="display: none;">
-						  <label style="color: white;">Alege numărul de meniuri Standard</label>
-						  <select name="Numar Meniuri Standard" class="form-control">
-							<option value="">-- Selectați o opțiune --</option>
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
-							<option value="6">6</option>
-							<option value="0">0</option>
-						  </select>
-						</div>
+							<div class="form-group" id="campMeniu" style="display: none;">
+								<label style="color: white;">Alege numărul de meniuri Standard</label>
+								<select name="Numar Meniuri Standard" class="form-control">
+									<option value="">-- Selectați o opțiune --</option>
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+									<option value="6">6</option>
+									<option value="0">0</option>
+								</select>
+							</div>
 				
-						<div class="form-group" id="campVegan" style="display: none;">
-						  <label style="color: white;">Alege numărul de meniuri Vegetarian</label>
-						  <select name="Numar Meniuri Vegetarian" class="form-control">
-							<option value="">-- Selectați o opțiune --</option>
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
-							<option value="6">6</option>
-							<option value="0">0</option>
-						  </select>
-						</div>
+							<div class="form-group" id="campVegan" style="display: none;">
+								<label style="color: white;">Alege numărul de meniuri Vegetarian</label>
+								<select name="Numar Meniuri Vegetarian" class="form-control">
+									<option value="">-- Selectați o opțiune --</option>
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+									<option value="6">6</option>
+									<option value="0">0</option>
+								</select>
+							</div>
 				
-						<div class="form-group" id="campMesaj" style="display: none; margin-bottom: 20px;">
-						  <label style="color: white;">Vrei să ne lași un mesaj?</label>
-						  <textarea class="form-control" name="Mesaj" rows="7" style="height: 120px;" placeholder="Completați aici"></textarea>
-						</div>
+							<div class="form-group" id="campMesaj" style="display: none; margin-bottom: 20px;">
+								<label style="color: white;">Vrei să ne lași un mesaj?</label>
+								<textarea class="form-control" name="Mesaj" rows="7" style="height: 120px;" placeholder="Completați aici"></textarea>
+							</div>
 				
-						<br>
-						<input type="submit" class="btn btn-default btn-block" value="Trimite Răspuns" id="submit" style="display: none;">
-					  </form>
+							<br>
+							<input type="submit" class="btn btn-default btn-block" value="Trimite Răspuns" id="submit" style="display: none;">
+						</form>
 					</div>
 				</div>
+				
 				
 				  <!-- Modal -->
 				  <div id="myModal" class="modal" style="display: none;">

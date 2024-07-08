@@ -208,7 +208,7 @@ h1, h2, h3, h4, h5, h6, figure {
   display: -moz-inline-stack;
   display: inline-block;
   zoom: 1;
-  *display: inline;
+  display: inline;
   -webkit-transition: 0.3s;
   -o-transition: 0.3s;
   transition: 0.3s;
@@ -791,13 +791,13 @@ h1, h2, h3, h4, h5, h6, figure {
   display: -moz-inline-stack;
   display: inline-block;
   zoom: 1;
-  *display: inline;
+  display: inline;
 }
 .fh5co-social-icons li a {
   display: -moz-inline-stack;
   display: inline-block;
   zoom: 1;
-  *display: inline;
+  display: inline;
   color: #F14E95;
   padding-left: 10px;
   padding-right: 10px;
@@ -1983,4 +1983,37 @@ button {
 button:hover {
 	box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
 		0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+/* Resetarea stilurilor implicite ale browserului */
+select {
+  -webkit-appearance: none; /* Safari și Chrome */
+  -moz-appearance: none; /* Firefox */
+  appearance: none; /* Versiuni moderne ale browserelor */
+  background: #200202; /* Fundal alb */
+  border: 1px solid #ccc; /* Bordură gri */
+  padding: 10px; /* Spațiere interioară */
+  font-size: 16px; /* Mărimea fontului */
+  color: #333; /* Culoarea textului */
+  width: 100%; /* Lățime completă */
+  box-sizing: border-box; /* Include border și padding în lățime */
+}
+
+option {
+  background: red; /* Fundal alb pentru opțiuni */
+  color: #333; /* Culoarea textului */
+}
+
+/* Adăugarea unei săgeți personalizate pentru select */
+.select-wrapper {
+  position: relative; /* Poziționare relativă */
+}
+
+.select-wrapper::after {
+  content: '▼'; /* Săgeată în jos */
+  position: absolute; /* Poziționare absolută */
+  top: 50%; /* La mijloc vertical */
+  right: 10px; /* La marginea dreaptă */
+  transform: translateY(-50%); /* Centrare verticală */
+  pointer-events: none; /* Nu poate fi clicată */
 }
