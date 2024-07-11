@@ -11,6 +11,13 @@ document.addEventListener('DOMContentLoaded', function() {
     var submitButton = document.getElementById('submit');
     var form = document.getElementById('contact-form');
 
+    function setDefaultValues() {
+        campCopii.querySelector('select').value = '0';
+        campCazare.querySelector('select').value = 'Nu';
+        campMeniu.querySelector('select').value = '0';
+        campVegan.querySelector('select').value = '0';
+    }
+
     function validateForm() {
         var valid = true;
 
@@ -18,6 +25,8 @@ document.addEventListener('DOMContentLoaded', function() {
             if (numarPersoane.value === '1' && campInvitat.querySelector('input').value.trim().length < 3) {
                 valid = false;
             }
+            setDefaultValues();
+            
         } else {
             if (numarPersoane.value === '1') {
                 if (campInvitat.querySelector('input').value.trim().length < 3) {
@@ -53,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
-        submitButton.style.display = valid ? 'block' : 'none';
+        //submitButton.style.display = valid ? 'block' : 'none';
         return valid;
     }
 
