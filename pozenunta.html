@@ -1,154 +1,168 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!-->
-<html class="no-js"> <!--<![endif]-->
+<html class="no-js">
 
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Nunta Andrei și Ana</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Nunta Andrei și Ana</title>
 
+    <link href='https://fonts.googleapis.com/css?family=Work+Sans:400,300,600,400italic,700' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Sacramento" rel="stylesheet">
 
-	<link href='https://fonts.googleapis.com/css?family=Work+Sans:400,300,600,400italic,700' rel='stylesheet'
-		type='text/css'>
-	<link href="https://fonts.googleapis.com/css?family=Sacramento" rel="stylesheet">
+    <!-- Include CSS -->
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/icomoon.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="css/style.css">
 
+    <!-- Include Google API scripts -->
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script src="https://apis.google.com/js/client:auth2.js"></script>
+    <script>
+        var CLIENT_ID = 'Y393599029680-1lhmu0dkdeu0u53ae03crv5v7g7upr9j.apps.googleusercontent.com'; // Înlocuiește cu client_id-ul tău
+        var API_KEY = 'AIzaSyBOB4cDdP0HgnEDt-OCPoxaft4MCwAPp-k'; // Înlocuiește cu API key-ul tău
+        var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"];
+        var SCOPES = 'https://www.googleapis.com/auth/drive.readonly';
+        var FOLDER_ID = '1B-lQqdcDwzQ59J422k1gyidzQJ6LPvAS'; // Înlocuiește cu ID-ul folderului din Google Drive
 
+        var authorizeButton;
+        var signoutButton;
+        var uploadButton;
+        var gallery;
 
-	<!-- Animate.css -->
-	<link rel="stylesheet" href="css/animate.css">
-	<!-- Icomoon Icon Fonts-->
-	<link rel="stylesheet" href="css/icomoon.css">
-	<!-- Bootstrap  -->
-	<link rel="stylesheet" href="css/bootstrap.css">
+        function handleClientLoad() {
+            gapi.load('client:auth2', initClient);
+        }
 
-	<!-- Magnific Popup -->
-	<link rel="stylesheet" href="css/magnific-popup.css">
+        function initClient() {
+            gapi.client.init({
+                apiKey: API_KEY,
+                clientId: CLIENT_ID,
+                discoveryDocs: DISCOVERY_DOCS,
+                scope: SCOPES
+            }).then(function () {
+                authorizeButton = document.getElementById('auth-button');
+                signoutButton = document.getElementById('signout-button');
+                uploadButton = document.getElementById('upload-button');
+                gallery = document.getElementById('gallery');
 
-	<!-- Owl Carousel  -->
-	<link rel="stylesheet" href="css/owl.carousel.min.css">
-	<link rel="stylesheet" href="css/owl.theme.default.min.css">
+                var authInstance = gapi.auth2.getAuthInstance();
+                authInstance.isSignedIn.listen(updateSigninStatus);
+                updateSigninStatus(authInstance.isSignedIn.get());
+                authorizeButton.onclick = handleAuthClick;
+                signoutButton.onclick = handleSignoutClick;
+                uploadButton.onclick = listFiles;
+            }).catch(function (error) {
+                console.error('Error initializing Google API client:', error);
+            });
+        }
 
-	<!-- Theme style  -->
-	<link rel="stylesheet" href="css/style.css">
+        function updateSigninStatus(isSignedIn) {
+            if (isSignedIn) {
+                authorizeButton.style.display = 'none';
+                signoutButton.style.display = 'block';
+                uploadButton.style.display = 'block';
+                listFiles();
+            } else {
+                authorizeButton.style.display = 'block';
+                signoutButton.style.display = 'none';
+                uploadButton.style.display = 'none';
+                gallery.innerHTML = '';
+            }
+        }
 
-	<!-- Modernizr JS -->
-	<script src="js/modernizr-2.6.2.min.js"></script>
-	<!-- FOR IE9 below -->
-	<!--[if lt IE 9]>
-	<script src="js/respond.min.js"></script>
-	<![endif]-->
+        function handleAuthClick(event) {
+            gapi.auth2.getAuthInstance().signIn();
+        }
 
+        function handleSignoutClick(event) {
+            gapi.auth2.getAuthInstance().signOut();
+        }
+
+        function listFiles() {
+            gapi.client.drive.files.list({
+                'q': `'${FOLDER_ID}' in parents and mimeType contains 'image/'`,
+                'pageSize': 10,
+                'fields': "nextPageToken, files(id, name, mimeType, webViewLink, webContentLink)"
+            }).then(function (response) {
+                var files = response.result.files;
+                if (files && files.length > 0) {
+                    gallery.innerHTML = '';
+                    for (var i = 0; i < files.length; i++) {
+                        var file = files[i];
+                        gallery.innerHTML += '<img src="' + file.webContentLink + '" style="width:200px;margin:10px;">';
+                    }
+                } else {
+                    gallery.innerHTML = 'Nu sunt fișiere disponibile în acest folder.';
+                }
+            }).catch(function (error) {
+                console.error('Error fetching files:', error);
+            });
+        }
+
+        // Load the client after the page is loaded
+        window.onload = handleClientLoad;
+    </script>
 </head>
 
 <body>
+    <div class="fh5co-loader"></div>
 
-	<div class="fh5co-loader"></div>
+    <div id="page">
+        <nav class="fh5co-nav" role="navigation">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-6 left-logo">
+                        <div id="fh5co-logo-left"><a href="pozenunta.html">Fotografii nuntă</a></div>
+                    </div>
+                    <div class="col-xs-6 right-logo">
+                        <div id="fh5co-logo-right"><a href="index.html">Nunta noastră</a></div>
+                    </div>
+                </div>
+            </div>
+        </nav>
 
-	<div id="page">
-		<nav class="fh5co-nav" role="navigation">
-			<div class="container">
-				<div class="row">
-					<div class="col-xs-6 left-logo">
-						<div id="fh5co-logo-left"><a href="pozenunta.html">Fotografii nuntă</a></div>
-					</div>
-					<div class="col-xs-6 right-logo">
-						<div id="fh5co-logo-right"><a href="index.html">Nunta noastră</a></div>
-					</div>
+        <header id="fh5co-header" class="fh5co-cover" role="banner"
+            style="background-image:url(https://images.unsplash.com/photo-1512331283953-19967202267a?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);"
+            data-stellar-background-ratio="0.5">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2 text-center">
+                        <div class="display-t">
+                            <div class="display-tc animate-box" data-animate-effect="fadeIn">
+                                <h1>Andrei &amp; Ana</h1>
+                                <h1>Fotografii Nuntă</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
 
-				</div>
+        <div id="fh5co-testimonial">
+            <div class="container">
+                <div class="row">
+                    <div class="row animate-box">
+                        <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+                            <h2>Fotografii</h2><br>
+                            <button id="auth-button">Autentificare</button>
+                            <button id="signout-button" style="display: none;">Deconectare</button>
+                            <button id="upload-button" style="display: none;">Încarcă Fotografii</button>
+                            <div id="gallery"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-			</div>
-		</nav>
-
-		<header id="fh5co-header" class="fh5co-cover" role="banner"
-			style="background-image:url(https://images.unsplash.com/photo-1512331283953-19967202267a?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);"
-			data-stellar-background-ratio="0.5">
-			<div class="overlay"></div>
-			<div class="container">
-				<div class="row">
-					<div class="col-md-8 col-md-offset-2 text-center">
-						<div class="display-t">
-							<div class="display-tc animate-box" data-animate-effect="fadeIn">
-								<h1>Andrei &amp; Ana</h1>
-								<h1>Fotografii Nuntă</h1>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</header>
-
-		<div id="fh5co-testimonial">
-			<div class="container">
-				<div class="row">
-					<div class="row animate-box">
-						<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-							<h2>Fotografii</h2><br>
-                            <button type="button" >Încarcă Fotografii</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		
-
-
-		
-
-	<div class="gototop js-top">
-		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
-	</div>
-
-	<!-- jQuery -->
-	<script src="js/jquery.min.js"></script>
-	<!-- jQuery Easing -->
-	<script src="js/jquery.easing.1.3.js"></script>
-	<!-- Bootstrap -->
-	<script src="js/bootstrap.min.js"></script>
-	<!-- Waypoints -->
-	<script src="js/jquery.waypoints.min.js"></script>
-	<!-- Carousel -->
-	<script src="js/owl.carousel.min.js"></script>
-	<!-- countTo -->
-	<script src="js/jquery.countTo.js"></script>
-
-	<!-- Stellar -->
-	<script src="js/jquery.stellar.min.js"></script>
-	<!-- Magnific Popup -->
-	<script src="js/jquery.magnific-popup.min.js"></script>
-	<script src="js/magnific-popup-options.js"></script>
-
-	<!-- // <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/0.0.1/prism.min.js"></script> -->
-	<script src="js/simplyCountdown.js"></script>
-	<!-- Main -->
-	<script src="js/main.js"></script>
-
-	<script src="js/fisaExcel.js"></script>
-	<script src="js/formular.js"></script>
-
-	<script>
-		var d = new Date(new Date().getTime() + 200 * 120 * 120 * 2000);
-
-		// default example
-		simplyCountdown('.simply-countdown-one', {
-			year: d.getFullYear(),
-			month: d.getMonth() + 1,
-			day: d.getDate()
-		});
-
-		//jQuery example
-		$('#simply-countdown-losange').simplyCountdown({
-			year: d.getFullYear(),
-			month: d.getMonth() + 1,
-			day: d.getDate(),
-			enableUtc: false
-		});
-	</script>
-
+        <div class="gototop js-top">
+            <a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
+        </div>
+    </div>
 </body>
 
 </html>
